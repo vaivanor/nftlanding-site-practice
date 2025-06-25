@@ -1,0 +1,390 @@
+@use './vars' as *;
+@use './utils' as *;
+
+body {
+    font-family: $font-main;
+    a {
+        text-decoration: none;
+        color: $text-color-secondary;
+    }
+    @include hover-color ($text-color-main);
+    @media only screen and (min-width: 768px) {
+        padding: 0 $space-secondary;  
+        header, section.hero, section.hero-footer {
+            @include padding-none-l-r;
+        }
+    }
+}
+
+hr {
+    margin: 0;
+    border: 2px solid $color-background;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $space-main;
+    label {
+        input {
+            position: absolute;
+            display: none;
+        }
+        span {
+            background:url("../assets/menu.svg") no-repeat;
+            background-size: 1.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: block;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            @media only screen and (min-width: 768px) {
+                display: none;   
+            }
+        }
+        input:checked + span {
+            content: "";
+            background:url("../assets/menu-close.svg") no-repeat;
+        }
+        input:checked ~ nav {
+            background-color: rgb(238, 238, 238, 0.97);
+            box-shadow: 0rem 0.1rem 0.5rem $text-color-side;
+            display: block;
+            position: absolute;  
+            right: 1rem;
+            top: 5rem;
+            width: 250px;
+            height: 240px;
+            border-radius: 10px;
+            z-index: 1;
+            animation-timing-function: ease-in-out;
+            animation-name: menu-anim;
+            animation-duration: 0.5s;
+            a {
+                display: block;
+                position: relative;
+                margin: 2rem;
+                text-align: center;
+            }  
+            a:last-child {
+                color: $color-primary;
+            }    
+        }
+        @keyframes menu-anim {
+            from {right: -10rem;}
+            to {right: 1rem;}
+        }
+        nav {
+            display: none;
+                @media only screen and (min-width: 768px) {
+                display: block;  
+                a {
+                    margin-left: 1rem;
+                }
+                a:last-child {
+                    color: $color-primary;
+                } 
+            }
+        }
+    }     
+}
+
+section.hero {
+    padding: $space-main;
+    background-image: url('../assets/graphic.svg');
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-position: top -1rem right -12rem;
+    @include theme-hero;
+    .hero-left {
+        padding-right: 6rem;
+        @media only screen and (min-width: 768px) {
+            flex: 1;
+            padding-right: 0;
+        }
+    }
+    .hero-right {
+        @media only screen and (min-width: 768px) {
+            flex: 1;
+        }
+    }
+    @include hover-scale;
+}
+
+aside.banner {
+    padding: $space-main;
+    padding-top: $space-secondary;
+    margin-top: $space-main;
+    background-image: $gradient-main;
+    @media only screen and (min-width: 768px) {
+        border-radius: 1rem;
+    }
+    h2 {
+        @include font-format($text-color-main, $font-weight-semi, $font-size-l)
+    }
+    p {
+        @include font-format($text-color-main, $font-weight, $font-size-m)
+    }
+}
+
+section.logo-gallery {
+    padding: $space-main;
+    margin-top: $space-main;
+    margin-bottom: $space-main;
+    display: grid;
+    grid-template:
+    "logo-first-short logo-second" 
+    "logo-third logo-fifth" ;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-main;
+    .logo-first-short {
+        grid-area: logo-first-short;
+    }
+    .logo-first {
+        grid-area: logo-first;
+    }
+    .logo-second {
+        grid-area: logo-second;
+    }
+    .logo-third {
+        grid-area: logo-third;
+    }
+    .logo-fourth {
+        grid-area: logo-fourth;
+    }
+    .logo-fifth {
+        grid-area: logo-fifth;
+    }
+    @media only screen and (min-width: 1200px) {
+        @include padding-none-l-r;
+        margin-top: $space-main;
+        margin-bottom: $space-main;
+        grid-template:
+        "logo-first logo-second logo-third logo-fourth logo-fifth";
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        gap: $space-main;
+        img:nth-child(1) {
+            display: none;
+        }
+    }
+    img {
+        align-self: center;
+        height: 2.5rem;
+        @media only screen and (min-width: 1200px) {
+            justify-self: center;
+        }
+    }
+    img:nth-child(2), img:nth-child(5) {
+        display: none;
+        @media only screen and (min-width: 1200px) {
+            display: inline-block;
+        }
+    }
+}
+
+article.text-gallery {
+    padding: $space-main;
+    padding-top: 0;
+    @media only screen and (min-width: 768px) {
+        @include padding-none-l-r;
+    }
+    h2 {
+        @include font-format($text-color-main, $font-weight-semi, $font-size-l);
+    }
+    p {
+        @include font-format($text-color-secondary, $font-weight, $font-size-m);
+    }
+    a {
+        text-decoration: underline;
+        font-weight: $font-weight-min;
+    }
+}
+
+article.gallery {
+    padding: $space-main;
+    padding-top: 0;
+    margin-bottom: $space-secondary;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: $space-main;
+    position: relative;
+    @media only screen and (min-width: 768px) {
+        padding: 0;
+        padding-bottom: $space-main;
+    }
+    .gallery-item{
+        background-color: $color-background;
+        width: 290px;
+        border-radius: 16px;
+    }
+    .gallery-item-info {
+        padding: 1rem;
+        p {
+            margin: 0;
+        }
+        display: grid;
+        justify-content: space-between;
+        grid-template:
+        "series bid"
+        "name price"
+        "number days";
+        gap: 0.5rem;
+        .series {
+            grid-area: series;
+            @include font-format($color-secondary, $font-weight-min, $font-size-xs);
+            text-transform: uppercase;
+            align-self: center;
+        }
+        .bid {
+            grid-area: bid;
+            @include font-format($text-color-secondary, $font-weight-min, $font-size-xs);
+            text-align: right;
+            text-transform: uppercase;
+            align-self: center;
+        }
+        .name {
+            grid-area: name;
+            @include font-format($text-color-main, $font-weight-min, $font-size-m);
+            align-self: center;
+        }
+        .price {
+            grid-area: price;
+            @include font-format($text-color-main, $font-weight-min, $font-size-m);
+            text-align: right;
+            align-self: center;
+            position: relative;
+        }
+        .price:before {
+            content: url("../assets/eth.svg");
+            position: absolute;
+            transform: translate(-20px);
+        }
+        .number {
+            grid-area: number;
+            @include font-format($text-color-secondary, $font-weight-min, $font-size-m);
+            align-self: center;
+        }
+        .days {
+            grid-area: days;
+            @include font-format($text-color-secondary, $font-weight-min, $font-size-m);
+            text-align: right;
+            align-self: center;
+        }
+    }
+}
+
+section.hero-footer {
+    padding: $space-secondary $space-main;
+    background-image: url('../assets/graphic-2.svg');
+    background-repeat: no-repeat;
+    background-size: 210px;
+    background-position: bottom 0 right -2.5rem;
+    @include theme-hero;
+    @media only screen and (min-width: 768px) {
+        padding-bottom: 0;
+        align-items: end;
+    }
+    align-items: end;
+    .hero-footer-left {
+        padding-right: 8rem;
+        @media only screen and (min-width: 768px) {
+            flex: 1;
+            padding-right: 0;
+            padding-bottom: 5rem;
+        }
+    }
+    p::before {
+        content: "";
+        position: absolute;
+        border: 2px solid $color-background;
+        width: 100%;
+        left: 0;
+        transform: translateY(-1rem);
+        z-index: -1;
+        @media only screen and (min-width: 768px) {
+            display: none;
+        }
+    }
+    .hero-footer-right {
+        @media only screen and (min-width: 768px) {
+            flex: 1;
+            bottom: 0;
+        }
+    }
+    @include hover-scale;
+}
+
+footer {
+    padding: $space-main $space-main 0 $space-main;
+    @media only screen and (min-width: 768px) {
+        @include padding-none-l-r;
+        padding-top: $space-secondary;
+    }
+    .footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @media only screen and (min-width: 768px) {
+            flex-direction: row;
+        }
+        p, a {
+            @include font-format($text-color-secondary, $font-weight, $font-size-m);
+        }
+        .footer-left {
+            padding: $space-main 0;
+            img {
+                margin-right: 0.5rem;
+            }
+        }
+        .footer-right {
+            display: grid;
+            grid-template:
+            "footer-a footer-b"
+            "footer-c footer-d";
+            gap: $space-secondary;
+            .footer-item-a {
+                grid-area: footer-a;
+            }
+            .footer-item-b {
+                grid-area: footer-b;
+            }
+            .footer-item-c {
+                grid-area: footer-c;
+            }
+            .footer-item-d {
+                grid-area: footer-d;
+            }
+            @media only screen and (min-width: 768px) {
+                grid-template:
+                "footer-a footer-b footer-c footer-d";
+            }
+            p {
+                @include font-format($text-color-secondary, $font-weight-semi, $font-size-s);
+                text-transform: uppercase;
+                margin-bottom: $space-main;
+            }
+            a {
+                display: flex;
+                margin-top: 1rem;
+            }
+            @include hover-color ($text-color-main);
+        }
+    }
+    .footer-bottom {
+        padding: $space-main 0;
+        display: flex;
+        justify-content: space-between;
+        p {
+            @include font-format($text-color-side, $font-weight, $font-size-m);
+        }
+        p:last-child {
+            display: none;
+            @media only screen and (min-width: 768px) {
+                display: block;
+            }
+        }
+    }
+}
