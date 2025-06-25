@@ -1,0 +1,28 @@
+$font-main: "Inter", sans-serif;
+$font-weight: 400;
+$font-weight-min: 500;
+$font-weight-semi: 650;
+$font-weight-bold: 900;
+
+$font-size-xs: 14px;
+$font-size-s: 16px;
+$font-size-m: 20px;
+$font-size-l: 40px;
+$font-size-xl: 48px;
+$font-size-xxl: 76px;
+
+$color-primary: #FF3998;
+$color-secondary: #FF8139;
+$color-success: #39FFA0;
+$color-danger: #FF3939;
+$color-background: #EEEEEE;
+
+$text-color-main: #111111;
+$text-color-secondary: #555555;
+$text-color-side: #999999;
+
+$gradient-main: linear-gradient(60deg, $color-primary, $color-danger, $color-secondary, $color-success);
+
+$space-main: 2rem;
+$space-secondary: 4rem;
+$space-side: 8rem;
